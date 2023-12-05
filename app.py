@@ -6,6 +6,16 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return render_template('admin.html')
+    return render_template('login.html', error=error)
+
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
