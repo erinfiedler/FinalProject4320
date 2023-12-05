@@ -8,7 +8,11 @@ def home():
 
 @app.route("/admin")
 def admin():
-    return redirect(url_for("home"))
+    return render_template("admin.html")
+
+@app.route("/reservation")
+def reservation():
+    return render_template("make_reservation.html")
 
 print("Welcome to the Trip Reservation System")
 
