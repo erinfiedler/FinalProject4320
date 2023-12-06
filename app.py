@@ -12,10 +12,18 @@ def home():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return render_template('admin.html')
+        adminFile = open('./passcodes.txt')
+        for admin in adminFile.readlines():
+            admin = admin.split(',')
+            user = admin[0].strip()
+            password = admin[1].strip()
+            if request.form['username'] != user or request.form['password'] != password:
+                continue
+            else: 
+                return render_template('admin.html')
+        error = 'Invalid Credentials. Please try again.'
+    else:
+        return render_template('login.html', error=error)
     return render_template('login.html', error=error)
 
 #admin page
