@@ -19,7 +19,7 @@ def login():
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
-    
+
 # Authenticate admin login
 def authenticate_admin(username, password):
     admins = load_admin_credentials()
@@ -30,6 +30,11 @@ def reservation():
     return render_template("make_reservation.html")
 
 print("Welcome to the Trip Reservation System")
+
+#save reservation data to file
+def save_reservation(reservation):
+    #save reservations to text file
+    pass
 
 #get cost matrix
 def get_cost_matrix():
