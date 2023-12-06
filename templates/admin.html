@@ -1,11 +1,14 @@
 <html>
     <head>
         <title>Admin Page</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     </head>
     <body>
+        <div class=box>
         <h1>Reservation Log</h1>
         <p>This is the seating chart!!!</p>
-
+        <a href="{{ url_for('home') }}">Home</a>
+        </div>
     </body> 
    
 </html>
