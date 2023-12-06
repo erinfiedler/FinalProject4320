@@ -79,23 +79,35 @@ def save_reservation(reservation):
         # Handle errors while saving the reservation
             print(f"Error saving reservation: {e}")
 
-#display seating chart
-def seating_chart():
-    cost_matrix = get_cost_matrix()
-    reservations = load_reservations()
+# #display seating chart
+# def seating_chart():
+#     cost_matrix = get_cost_matrix()
+#     reservations = load_reservations()
 
-    print("Seating Chart:")
-    for row_num, row in enumerate(cost_matrix, start=1):
-        for col_num, seat_cost in enumerate(row, start=1):
-            # Check if the seat is reserved
-            reserved = any(row == seat_row and col == seat_col for _, seat_row, seat_col, _ in reservations)
+#     print("Seating Chart:")
+#     for row_num, row in enumerate(cost_matrix, start=1):
+#         for col_num, seat_cost in enumerate(row, start=1):
+#             # Check if the seat is reserved
+#             reserved = any(row == seat_row and col == seat_col for _, seat_row, seat_col, _ in reservations)
             
-            if reserved:
-                print(f"X", end=" ")  # Mark reserved seats with 'X'
-            else:
-                print(f"{row_num}-{col_num}(${seat_cost})", end=" ")  # Display seat number and cost
+#             if reserved:
+#                 print(f"X", end=" ")  # Mark reserved seats with 'X'
+#             else:
+#                 print(f"{row_num}-{col_num}(${seat_cost})", end=" ")  # Display seat number and cost
 
-        print()  # Move to the next row
+#         print()  # Move to the next row
+
+# Inside your Flask route or function
+@app.route('/seating_chart')
+def seating_chart():
+    # Generate or fetch seating chart data
+    seating_chart_data = [['_' for _ in range(4)] for _ in range(12)]
+    
+    # Simulate some reserved seats
+    seating_chart_data[0][0] = seating_chart_data[1][2] = 'X'
+
+    return render_template('seating_chart.html', seating_chart_data=seating_chart_data)
+
 
 #reserve seat
 @app.route('/reserve', methods=['GET', 'POST'])
