@@ -79,7 +79,12 @@ def save_reservation(reservation):
         # Handle errors while saving the reservation
             print(f"Error saving reservation: {e}")
 
-# #display seating chart
+#get cost matrix
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
+#display seating chart
 # def seating_chart():
 #     cost_matrix = get_cost_matrix()
 #     reservations = load_reservations()
@@ -131,10 +136,7 @@ def reserve_seat():
 
     return render_template('reserve_seat.html', cost_matrix=get_cost_matrix())
 
-#get cost matrix
-def get_cost_matrix():
-    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
-    return cost_matrix
+
 
 
 if __name__ == '__main__':
