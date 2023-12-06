@@ -30,7 +30,7 @@ def reservation():
 print("Welcome to the Trip Reservation System")
 
 #pull up existing reservations
-def show_existing_res():
+def load_reservations():
     reservations = []
 
     try:
@@ -70,7 +70,21 @@ def save_reservation(reservation):
 
 #display seating chart
 def seating_chart():
-    pass
+    cost_matrix = get_cost_matrix()
+    reservations = load_reservations()
+
+    print("Seating Chart:")
+    for row_num, row in enumerate(cost_matrix, start=1):
+        for col_num, seat_cost in enumerate(row, start=1):
+            # Check if the seat is reserved
+            reserved = any(row == seat_row and col == seat_col for _, seat_row, seat_col, _ in reservations)
+            
+            if reserved:
+                print(f"X", end=" ")  # Mark reserved seats with 'X'
+            else:
+                print(f"{row_num}-{col_num}(${seat_cost})", end=" ")  # Display seat number and cost
+
+        print()  # Move to the next row
 
 #reserve seat
 @app.route('/reserve', methods=['GET', 'POST'])
@@ -93,6 +107,7 @@ def reserve_seat():
         return render_template('reservation_success.html', reservation_code='e_ticket_number')
 
     return render_template('reserve_seat.html', cost_matrix=get_cost_matrix())
+
 #get cost matrix
 def get_cost_matrix():
     cost_matrix = [[100, 75, 50, 100] for row in range(12)]
