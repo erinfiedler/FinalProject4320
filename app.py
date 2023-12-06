@@ -29,6 +29,31 @@ def reservation():
 
 print("Welcome to the Trip Reservation System")
 
+#pull up existing reservations
+def show_existing_res():
+    reservations = []
+
+    try:
+        with open('reservations.txt', 'r') as file:
+            for line in file:
+                # Split each line into individual fields
+                data = line.strip().split(', ')
+                
+                # Convert seat row and column to integers
+                row, col = map(int, data[1:3])
+
+                # Append the reservation data to the list
+                reservations.append((data[0], row, col, data[3]))
+
+    except FileNotFoundError:
+        # Handle the case where the file is not found
+        print("Error: reservations.txt not found.")
+    except Exception as e:
+        # Handle other potential errors
+        print(f"Error loading reservations: {e}")
+
+    return reservations
+    
 #save reservation data to file
 def save_reservation(reservation):
     #save reservations to text file
