@@ -25,6 +25,7 @@ def admin():
     chart_data = display_seating_chart()
     return render_template('admin.html', total_sales=total_sales, seating_chart=chart_data)
 
+#reservation page
 @app.route("/reservation")
 def reservation():
     return render_template("make_reservation.html")
