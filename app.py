@@ -19,6 +19,11 @@ def login():
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
+    
+# Authenticate admin login
+def authenticate_admin(username, password):
+    admins = load_admin_credentials()
+    return (username, password) in admins
 
 @app.route("/reservation")
 def reservation():
@@ -30,6 +35,7 @@ print("Welcome to the Trip Reservation System")
 def get_cost_matrix():
     cost_matrix = [[100, 75, 50, 100] for row in range(12)]
     return cost_matrix
+
 
 if __name__ == '__main__':
     app.run(debug=True)
