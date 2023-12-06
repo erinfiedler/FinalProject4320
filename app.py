@@ -53,11 +53,20 @@ def show_existing_res():
         print(f"Error loading reservations: {e}")
 
     return reservations
-    
+
 #save reservation data to file
 def save_reservation(reservation):
-    #save reservations to text file
-    pass
+        try:
+            with open('reservations.txt', 'a') as file:
+            # Convert seat row and column to strings for writing to file
+                row, col = map(str, reservation[1:3])
+
+            # Join reservation data into a string and write to file
+                file.write(', '.join([reservation[0], row, col, reservation[3]]) + '\n')
+
+        except Exception as e:
+        # Handle errors while saving the reservation
+            print(f"Error saving reservation: {e}")
 
 #display seating chart
 def seating_chart():
