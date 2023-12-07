@@ -128,7 +128,7 @@ def reserve_seat():
             price = calculate_total_sales(seat_row, seat_column)
 
             # Save reservation
-            reservation = (first_name, last_name, seat_row, seat_column, price, e_ticket_number)
+            reservation = (first_name, last_name, seat_row, seat_column, price)
             save_reservation(reservation)
 
             # Mark the seat as reserved
