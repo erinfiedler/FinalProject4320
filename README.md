@@ -1,4 +1,4 @@
-# FinalProject4320
+# Scrum Team 8 FinalProject4320
 
 The bus can seat up to 48 people, 12 rows of 4 seats each
 A. Create a seating chart and load the initial reservations
