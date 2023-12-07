@@ -124,6 +124,21 @@ def reserve_seat():
 
     return render_template('reserve_seat.html', cost_matrix=get_cost_matrix())
 
+@app.route('/reservation_info/<e_ticket_number>')
+def reservation_info(e_ticket_number):
+    # Retrieve reservation information based on the e_ticket_number
+    # This could involve reading from the reservations.txt file
+
+    # For demonstration purposes, I'm creating a placeholder data
+    reservation_info = {
+        'first_name': first_name,
+        'last_name': last_name,
+        'seat_row': seat_row,
+        'seat_column': seat_column,
+        'e_ticket_number': e_ticket_number,
+    }
+
+    return render_template('reservation_success.html', reservation_info=reservation_info)
 
 
 
