@@ -113,7 +113,7 @@ def calculate_price(row, col):
     return cost_matrix[row - 1][col - 1]
 
 #reserve seat
-@app.route('/reserve', methods=['GET', 'POST'])
+@app.route('/reservation', methods=['GET', 'POST'])
 def reserve_seat():
     if request.method == 'POST':
         # Process reservation form data
