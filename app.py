@@ -26,12 +26,17 @@ def login():
         return render_template('login.html', error=error)
     return render_template('login.html', error=error)
 
+#get cost matrix
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
 #admin page
 @app.route("/admin")
 def admin():
-    total_sales = calculate_total_sales() # Function not made
+    #total_sales calculate_total_sales() - Function not made
     chart_data = display_seating_chart() # Function not made
-    return render_template('admin.html', total_sales=total_sales, seating_chart=chart_data)
+    return render_template('admin.html', cost_matrix, seating_chart=chart_data)
 
 #reservation page
 @app.route("/reservation")
@@ -81,11 +86,6 @@ def save_reservation(reservation):
     except Exception as e:
         # Handle errors while saving the reservation
         print(f"Error saving reservation: {e}")
-
-#get cost matrix
-def get_cost_matrix():
-    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
-    return cost_matrix
 
 
 # Inside your Flask route or function
