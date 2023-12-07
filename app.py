@@ -149,7 +149,5 @@ def reserve_seat():
 def reservation_info(e_ticket_number):
     return render_template('reservation_success.html', reservation_info=reservation_info)
 
-
-
 if __name__ == '__main__':
     app.run(debug=True, port=5002)
