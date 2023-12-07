@@ -20,6 +20,7 @@
         <input type="number" name="seat_column" min="0" max="3" required><br>
         <button type="submit">Reserve Seat</button>
     </form>
+    <a href="{{ url_for('seating_chart') }}">View Seating Chart</a>
     
     {% if error %}
         <p style="color: red;">{{ error }}</p>
