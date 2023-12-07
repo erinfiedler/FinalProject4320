@@ -29,8 +29,8 @@ def login():
 #admin page
 @app.route("/admin")
 def admin():
-    total_sales = calculate_total_sales()
-    chart_data = display_seating_chart()
+    total_sales = calculate_total_sales() # Function not made
+    chart_data = display_seating_chart() # Function not made
     return render_template('admin.html', total_sales=total_sales, seating_chart=chart_data)
 
 #reservation page
