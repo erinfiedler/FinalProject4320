@@ -136,6 +136,7 @@ def reserve_seat():
             reserve_row_col(seat_row, seat_column)
 
             # Display reservation information
+            e_ticket_number = generate_reservation_code() 
             return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number', price=price))
 
         else:
