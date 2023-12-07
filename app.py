@@ -108,7 +108,7 @@ def is_seat_available(row, col):
 def reserve_row_col(row, col):
     seats[row - 1][col - 1] = 1  # Mark the seat as reserved
 
-def calculate_price(row, col):
+def calculate_total_sales(row, col):
     cost_matrix = get_cost_matrix()
     return cost_matrix[row - 1][col - 1]
 
@@ -125,10 +125,10 @@ def reserve_seat():
          # Check if the seat is available
         if is_seat_available(seat_row, seat_column):
             # Calculate price
-            price = calculate_price(seat_row, seat_column)
+            price = calculate_total_sales(seat_row, seat_column)
 
             # Save reservation
-            reservation = (first_name, last_name, seat_row, seat_column)
+            reservation = (first_name, last_name, seat_row, seat_column, price, e_ticket_number)
             save_reservation(reservation)
 
             # Mark the seat as reserved
