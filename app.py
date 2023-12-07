@@ -105,7 +105,7 @@ seats = [[0] * 4 for _ in range(12)]  # Initialize all seats as available
 def is_seat_available(row, col):
     return seats[row - 1][col - 1] == 0
 
-def reserve_seat(row, col):
+def reserve_row_col(row, col):
     seats[row - 1][col - 1] = 1  # Mark the seat as reserved
 
 def calculate_price(row, col):
@@ -132,7 +132,7 @@ def reserve_seat():
             save_reservation(reservation)
 
             # Mark the seat as reserved
-            reserve_seat(seat_row, seat_column)
+            reserve_row_col(seat_row, seat_column)
 
             # Display reservation information
             return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number', price=price))
@@ -145,8 +145,8 @@ def reserve_seat():
 
 
 
-@app.route('/reservation_info/<e_ticket_number>')
-def reservation_info(e_ticket_number):
+@app.route('/reservation_info')
+def reservation_info():
     return render_template('reservation_success.html', reservation_info=reservation_info)
 
 if __name__ == '__main__':

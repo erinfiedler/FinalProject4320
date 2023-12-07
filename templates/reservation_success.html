@@ -8,9 +8,9 @@
 <body>
     <h2>Reservation Information</h2>
 
-    <p>Name: {{ reservation_info.first_name }} {{ reservation_info.last_name }}</p>
-    <p>Seat: Row {{ reservation_info.seat_row }}, Column {{ reservation_info.seat_column }}</p>
-    <p>e-Ticket Number: {{ reservation_info.e_ticket_number }}</p>
+    <p>Name: {{ reservation_info['first_name'] }} {{ reservation_info['last_name'] }}</p>
+    <p>Seat: Row {{ reservation_info['seat_row'] }}, Column {{ reservation_info['seat_column'] }}</p>
+    <p>e-Ticket Number: {{ reservation_info['e_ticket_number'] }}</p>
 
     <a href="{{ url_for('home') }}">Back to Main Menu</a>
 </body>
