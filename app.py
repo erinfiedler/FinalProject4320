@@ -70,19 +70,17 @@ def load_reservations():
 
 #save reservation data to file
 def save_reservation(reservation):
-        try:
-            #res code
-            reservation_code = generate_reservation_code()
-            with open('reservations.txt', 'a') as file:
+    try:
+        # Generate a reservation code
+        reservation_code = generate_reservation_code()
+        with open('reservations.txt', 'a') as file:
             # Convert seat row and column to strings for writing to file
-                row, col = map(str, reservation[1:3])
-
+            row, col = map(str, reservation[1:3])
             # Join reservation data into a string and write to file
-                file.write(', '.join([reservation[0], row, col, reservation_code]) + '\n')\
-
-        except Exception as e:
+            file.write(', '.join([reservation[0], row, col, reservation_code]) + '\n')
+    except Exception as e:
         # Handle errors while saving the reservation
-            print(f"Error saving reservation: {e}")
+        print(f"Error saving reservation: {e}")
 
 #get cost matrix
 def get_cost_matrix():
@@ -113,31 +111,20 @@ def reserve_seat():
         seat_column = int(request.form['seat_column'])
 
         # Implement seat reservation logic
-        # Check if the seat is available, calculate price, generate e_ticket number, etc.
+        # For example, check if the seat is available, calculate price, etc.
 
         # Save reservation
-        reservation = (first_name, seat_row, seat_column, 'e_ticket_number')
+        reservation = (first_name, seat_row, seat_column)
         save_reservation(reservation)
 
-        # Display reservation code
-        return render_template('reservation_success.html', reservation_code='e_ticket_number')
-
+        # Display reservation information
+        return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number'))
     return render_template('reserve_seat.html', cost_matrix=get_cost_matrix())
+
+
 
 @app.route('/reservation_info/<e_ticket_number>')
 def reservation_info(e_ticket_number):
-    # Retrieve reservation information based on the e_ticket_number
-    # This could involve reading from the reservations.txt file
-
-    # For demonstration purposes, I'm creating a placeholder data
-    reservation_info = {
-        'first_name': first_name,
-        'last_name': last_name,
-        'seat_row': seat_row,
-        'seat_column': seat_column,
-        'e_ticket_number': e_ticket_number,
-    }
-
     return render_template('reservation_success.html', reservation_info=reservation_info)
 
 
