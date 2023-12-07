@@ -141,7 +141,7 @@ def reserve_seat():
             print("Seat not available.")
         # Display reservation information
         return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number'))
-    return render_template('reserve_seat.html', cost_matrix=get_cost_matrix())
+    return render_template('make_reservation.html', cost_matrix=get_cost_matrix())
 
 
 
