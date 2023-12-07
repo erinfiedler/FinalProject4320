@@ -96,9 +96,21 @@ def seating_chart():
     
     # Simulate some reserved seats
     seating_chart_data[0][0] = seating_chart_data[1][2] = 'X'
-
     return render_template('seating_chart.html', seating_chart_data=seating_chart_data)
 
+#Seat reseration logic:
+# Define a 2D list to represent the seating chart
+seats = [[0] * 4 for _ in range(12)]  # Initialize all seats as available
+
+def is_seat_available(row, col):
+    return seats[row - 1][col - 1] == 0
+
+def reserve_seat(row, col):
+    seats[row - 1][col - 1] = 1  # Mark the seat as reserved
+
+def calculate_price(row, col):
+    cost_matrix = get_cost_matrix()
+    return cost_matrix[row - 1][col - 1]
 
 #reserve seat
 @app.route('/reserve', methods=['GET', 'POST'])
@@ -110,13 +122,23 @@ def reserve_seat():
         seat_row = int(request.form['seat_row'])
         seat_column = int(request.form['seat_column'])
 
-        # Implement seat reservation logic
-        # For example, check if the seat is available, calculate price, etc.
+         # Check if the seat is available
+        if is_seat_available(seat_row, seat_column):
+            # Calculate price
+            price = calculate_price(seat_row, seat_column)
 
-        # Save reservation
-        reservation = (first_name, seat_row, seat_column)
-        save_reservation(reservation)
+            # Save reservation
+            reservation = (first_name, last_name, seat_row, seat_column)
+            save_reservation(reservation)
 
+            # Mark the seat as reserved
+            reserve_seat(seat_row, seat_column)
+
+            # Display reservation information
+            return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number', price=price))
+
+        else:
+            print("Seat not available.")
         # Display reservation information
         return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number'))
     return render_template('reserve_seat.html', cost_matrix=get_cost_matrix())
