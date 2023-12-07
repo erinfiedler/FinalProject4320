@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-
+import random, string
 app = Flask(__name__)
 
 #return to main menu
@@ -40,6 +40,9 @@ def reservation():
 
 print("Welcome to the Trip Reservation System")
 
+def generate_reservation_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=16))
+
 #pull up existing reservations
 def load_reservations():
     reservations = []
@@ -68,12 +71,14 @@ def load_reservations():
 #save reservation data to file
 def save_reservation(reservation):
         try:
+            #res code
+            reservation_code = generate_reservation_code()
             with open('reservations.txt', 'a') as file:
             # Convert seat row and column to strings for writing to file
                 row, col = map(str, reservation[1:3])
 
             # Join reservation data into a string and write to file
-                file.write(', '.join([reservation[0], row, col, reservation[3]]) + '\n')
+                file.write(', '.join([reservation[0], row, col, reservation_code]) + '\n')\
 
         except Exception as e:
         # Handle errors while saving the reservation
