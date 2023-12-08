@@ -35,7 +35,7 @@ def get_cost_matrix():
 @app.route("/admin")
 def admin():
     #total_sales calculate_total_sales() - Function not made
-    chart_data = display_seating_chart() # Function not made  maybe use reservation_info=reservation_info?
+    chart_data = load_reservations() # display_seating_chart(), Function not made  maybe use reservation_info=reservation_info?
     
     cost_matrix=get_cost_matrix()
     return render_template('admin.html', cost_matrix, seating_chart=chart_data)
@@ -143,13 +143,16 @@ def reserve_seat():
         else:
             print("Seat not available.")
         # Display reservation information
-        return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number', price=price))
+        #return redirect(url_for('reservation_info', e_ticket_number='e_ticket_number', price=price))
     return render_template('make_reservation.html', cost_matrix=get_cost_matrix())
-
-
 
 @app.route('/reservation_info')
 def reservation_info():
+    #info should now be saved 100 percent
+    e_ticket_number=request.args.get("e_ticket_number")
+    price=request.args.get("price")
+    reservation_info={'e_ticket_number':e_ticket_number,"price":price}
+
     return render_template('reservation_success.html', reservation_info=reservation_info)
 
 if __name__ == '__main__':
