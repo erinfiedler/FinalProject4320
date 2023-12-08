@@ -18,8 +18,10 @@
         <input type="number" name="seat_row" min="0" max="11" required><br>
         <label for="seat_column">Seat Column:</label>
         <input type="number" name="seat_column" min="0" max="3" required><br>
+        <br>
         <input type="submit" value="Reserve Seat">
     </form>
+    <br>
     <a href="{{ url_for('seating_chart') }}">View Seating Chart</a>
     
     {% if error %}
