@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Reservation Information</title>
 </head>
 <body>
+    <div class=box>
     <h2>Reservation Information</h2>
 
     <p>Name: {{ reservation_info['first_name'] }} {{ reservation_info['last_name'] }}</p>
@@ -13,5 +15,6 @@
     <p>e-Ticket Number: {{ reservation_info['e_ticket_number'] }}</p>
     <p>Price: ${{ reservation_info['price'] }} </p>
     <a href="{{ url_for('home') }}">Back to Main Menu</a>
+    </div>
 </body>
 </html>
