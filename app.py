@@ -36,6 +36,7 @@ def get_cost_matrix():
 def admin():
     #total_sales calculate_total_sales() - Function not made
     chart_data = display_seating_chart() # Function not made  maybe use reservation_info=reservation_info?
+    
     cost_matrix=get_cost_matrix()
     return render_template('admin.html', cost_matrix, seating_chart=chart_data)
 
